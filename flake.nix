@@ -8,7 +8,7 @@
         "https://devenv.cachix.org"
         "https://nix-community.cachix.org"
         "https://ataraxiadev-foss.cachix.org"
-        "https://cache.ataraxiadev.com/ataraxiadev"
+        # "https://cache.ataraxiadev.com/ataraxiadev"
       ];
       
       trusted-public-keys = [
@@ -16,12 +16,12 @@
         "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "ataraxiadev-foss.cachix.org-1:ws/jmPRUF5R8TkirnV1b525lP9F/uTBsz2KraV61058="
-        "ataraxiadev:/V5bNjSzHVGx6r2XA2fjkgUYgqoz9VnrAHq45+2FJAs="
+        # "ataraxiadev:/V5bNjSzHVGx6r2XA2fjkgUYgqoz9VnrAHq45+2FJAs="
       ];
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -29,7 +29,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

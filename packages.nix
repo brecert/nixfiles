@@ -19,7 +19,7 @@ let
     hexpat-lsp = callPackage ./packages/hexpat-lsp { };
     fuchsia-cursor = callPackage ./packages/fuchsia-cursor { };
     
-    rpcs3 = ataraxiadev-nur.rpcs3;
+    # rpcs3 = ataraxiadev-nur.rpcs3;
     rusty-psn = callPackage ./packages/rusty-psn { withGui = false; };
     rusty-psn-gui = callPackage ./packages/rusty-psn { withGui = true; };
     

@@ -42,8 +42,8 @@
       nixpkgs-fmt
 
       # Gnome
-      gnome.gnome-boxes
-      gnome.gnome-tweaks
+      gnome-boxes
+      gnome-tweaks
 
       gnomeExtensions.appindicator
       gnomeExtensions.blur-my-shell
@@ -55,7 +55,7 @@
     ++ (with packages; [
       # Applications
       slippi.slippi-online
-      rpcs3
+      # rpcs3
 
       # Utils / Tools
       ols

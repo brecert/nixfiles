@@ -39,8 +39,8 @@ lib.mkMerge [
       firefox-gnome-theme = pkgs.fetchFromGitHub {
         owner = "rafaelmardojai";
         repo = "firefox-gnome-theme";
-        rev = "v126";
-        hash = "sha256-jVbj2JD5GRkP8s3vKBtd9PDpftf3kjLR0ZA/ND/c2+Q=";
+        rev = "v133";
+        hash = "sha256-k7v5PE6OcqMkC/u7aokwcxKDmTKM+ejiZGCsH9MK0s0=";
       };
     in
     {
@@ -120,7 +120,7 @@ lib.mkMerge [
 
       mutableExtensionsDir = false;
       extensions = with pkgs.vscode-extensions; [
-        rust-lang.rust-analyzer-nightly
+        # rust-lang.rust-analyzer-nightly
         denoland.vscode-deno
         editorconfig.editorconfig
         tamasfe.even-better-toml
