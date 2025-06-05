@@ -15,7 +15,7 @@
       # bnnuychat development (temporary)
       clang
       rustup
-      nodejs-18_x
+      # nodejs-18_x
       nodePackages_latest.pnpm
       deno
 
