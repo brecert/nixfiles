@@ -12,16 +12,10 @@ lib.mkMerge [
       enable = true;
       package = pkgs.gitFull;
 
-      userEmail = "me@bree.dev";
-      userName = "brecert";
+      settings = {
+        user.email = "me@bree.dev";
+        user.name = "brecert";
 
-      signing = {
-        signByDefault = true;
-        key = "3D2C64AC1898ED49";
-        # todo: key
-      };
-
-      extraConfig = {
         init.defaultBranch = "main";
         credential.helper = "libsecret";
 
@@ -29,6 +23,12 @@ lib.mkMerge [
           # nix consistency, not really gonna use this
           "https://github.com/" = { insteadOf = "github:"; };
         };
+      };
+
+      signing = {
+        signByDefault = true;
+        key = "3D2C64AC1898ED49";
+        # todo: key
       };
     };
   }
@@ -39,7 +39,7 @@ lib.mkMerge [
       firefox-gnome-theme = pkgs.fetchFromGitHub {
         owner = "rafaelmardojai";
         repo = "firefox-gnome-theme";
-        rev = "v137";
+        rev = "v149.1";
         hash = "sha256-oiHLDHXq7ymsMVYSg92dD1OLnKLQoU/Gf2F1GoONLCE=";
       };
     in
@@ -119,7 +119,7 @@ lib.mkMerge [
       enable = true;
 
       mutableExtensionsDir = false;
-      extensions = with pkgs.vscode-extensions; [
+      profiles.default.extensions = with pkgs.vscode-extensions; [
         # rust-lang.rust-analyzer-nightly
         denoland.vscode-deno
         editorconfig.editorconfig
@@ -137,7 +137,7 @@ lib.mkMerge [
     home-modules.vscode = {
       outOfStoreUserSettings = "${flakePath}/nymi/bree/vscode/settings.json";
       overrideUserSettings = {
-        "ols.server.path" = "${packages.ols}/bin/ols";
+        "ols.server.path" = "${pkgs.ols}/bin/ols";
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
       };
     };

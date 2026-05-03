@@ -4,7 +4,7 @@
   home.packages =
     (with pkgs; [
       # Applications
-      tdesktop
+      telegram-desktop
       prismlauncher
       sublime-merge
       imhex
@@ -19,6 +19,9 @@
       nodePackages_latest.pnpm
       deno
 
+      ols
+      odin
+
       # aoc (temporary)
       ruby
       
@@ -29,9 +32,6 @@
         ps.setuptools
       ]))
       python3Packages.pyside6
-
-      qt6.full
-      qtcreator
       
       qgnomeplatform-qt6
       adwaita-qt6
@@ -40,7 +40,8 @@
       nil
       cachix
       nixpkgs-fmt
-
+      pulseaudioFull
+      
       # Gnome
       gnome-boxes
       gnome-tweaks
@@ -58,8 +59,6 @@
       # rpcs3
 
       # Utils / Tools
-      ols
-      odin
       hexpat-lsp
       tower-unite-cache-thumbnailer
     ]);

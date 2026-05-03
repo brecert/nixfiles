@@ -1,4 +1,4 @@
-{ pkgs, specialArgs, ... }:
+{ config, pkgs, specialArgs, ... }:
 
 {
   imports =
@@ -21,7 +21,7 @@
   ];
 
   hardware.bluetooth.enable = false;
-  hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
+  hardware.firmware = [ pkgs.linux-firmware ];
 
   networking.hostName = "nymi";
   networking.networkmanager.enable = true;
@@ -53,12 +53,15 @@
 
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  # services.xserver.enable = true;
+  # services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.graphics.enable = true;
   hardware.nvidia = {
-    open = false;
+    open = true;
     powerManagement.enable = true;
-    modesetting.enable = false;
+    modesetting.enable = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
 
@@ -76,9 +79,10 @@
   # xdg.portal.config.common.default = "*";
   
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.gdm.wayland = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.wayland = true;
+  services.desktopManager.gnome.enable = true;
+  services.gnome.gnome-remote-desktop.enable = false;
 
   # services.xserver.displayManager.sddm.enable = true;
   # services.desktopManager.lomiri.enable = true;
@@ -93,15 +97,17 @@
 
   # Enable sound.
   security.rtkit.enable = true;
-  # sound.enable = true;
-  hardware.pulseaudio.enable = false;
+
+  services.pulseaudio.enable = true;
   services.pipewire = {
-    enable = true;
+    enable = false;
     audio.enable = true;
     pulse.enable = true;
     alsa.enable = true;
-    jack.enable = true;
+    alsa.support32Bit = true;
     wireplumber.enable = true;
+    package = pkgs.pulseaudioFull;
+    systemWide = true;
   };
 
   services.earlyoom = {
@@ -142,7 +148,7 @@
       # fira-code
       # fira-code-symbols
       noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-cjk-sans
     ];
 

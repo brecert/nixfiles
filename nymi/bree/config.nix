@@ -36,6 +36,6 @@ lib.mkMerge [
   {
     gtk.enable = true;
     gtk.theme.package = pkgs.gnome-themes-extra;
-    gtk.theme.name = "Adwaita-dark";
+    gtk.theme.name = "Adwaita";
   }
 ]
