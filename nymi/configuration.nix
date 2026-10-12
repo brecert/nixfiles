@@ -80,7 +80,6 @@
   
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
-  services.displayManager.gdm.wayland = true;
   services.desktopManager.gnome.enable = true;
   services.gnome.gnome-remote-desktop.enable = false;
 
@@ -101,7 +100,7 @@
   services.pulseaudio.enable = true;
   services.pipewire = {
     enable = false;
-    audio.enable = true;
+    audio.enable = false;
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -135,7 +134,6 @@
 
   environment.systemPackages = with pkgs; [
     micro
-    neofetch
   ];
 
   services.flatpak.enable = true;

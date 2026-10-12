@@ -34,35 +34,31 @@ lib.mkMerge [
   }
 
   # Firefox
-  (
-    let
-      firefox-gnome-theme = pkgs.fetchFromGitHub {
-        owner = "rafaelmardojai";
-        repo = "firefox-gnome-theme";
-        rev = "v149.1";
-        hash = "sha256-oiHLDHXq7ymsMVYSg92dD1OLnKLQoU/Gf2F1GoONLCE=";
-      };
-    in
-    {
-      programs.firefox = {
-        enable = true;
-        profiles.primary = {
-          isDefault = true;
+  {
+    programs.firefox = {
+      enable = true;
+      configPath = ".mozilla/firefox";
+      profiles.primary = {
+        isDefault = true;
 
-          settings = {
-            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-            "svg.context-properties.content.enabled" = true;
-            "gnomeTheme.hideSingleTab" = true;
-            "gnomeTheme.normalWidthTabs" = false;
-          };
-
-          userChrome = ''
-            @import "${firefox-gnome-theme}/userChrome.css"
-          '';
+        settings = {
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "svg.context-properties.content.enabled" = true;
+          "gnomeTheme.hideSingleTab" = true;
+          "gnomeTheme.normalWidthTabs" = false;
         };
+
+        userChrome = ''
+          @import "${pkgs.firefox-gnome-theme}/userChrome.css"
+        '';
+
+        userContent = ''
+          @import "${pkgs.firefox-gnome-theme}/userContent.css";
+        '';
       };
-    }
-  )
+    };
+  }
+
 
   # Chromium
   {

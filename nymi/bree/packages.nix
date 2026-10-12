@@ -16,7 +16,7 @@
       clang
       rustup
       # nodejs-18_x
-      nodePackages_latest.pnpm
+      pnpm
       deno
 
       ols
@@ -59,6 +59,6 @@
 
       # Utils / Tools
       hexpat-lsp
-      tower-unite-cache-thumbnailer
+      # tower-unite-cache-thumbnailer
     ]);
 }

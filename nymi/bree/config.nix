@@ -9,6 +9,7 @@ lib.mkMerge [
       xdg.enable = true;
       xdg.userDirs = {
         enable = true;
+        setSessionVariables = true;
         desktop = "${home}/Desktop";
         documents = "${home}/Documents";
         download = "${home}/Downloads";
@@ -23,7 +24,7 @@ lib.mkMerge [
         };
       };
 
-      xdg.dataFile."sushi".source = "${packages.tower-unite-cache-thumbnailer}/share/sushi";
+      # xdg.dataFile."sushi".source = "${packages.tower-unite-cache-thumbnailer}/share/sushi";
     }
   )
 
@@ -37,5 +38,6 @@ lib.mkMerge [
     gtk.enable = true;
     gtk.theme.package = pkgs.gnome-themes-extra;
     gtk.theme.name = "Adwaita";
+    gtk.gtk4.theme = null;
   }
 ]
