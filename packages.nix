@@ -3,14 +3,12 @@
 , callPackages
 # required inputs
 , system
-, slippi
 , tower-unite-cache
 , ataraxiadev-nur
 }:
 
 let 
   self = {
-    inherit slippi;
     inherit (tower-unite-cache) tower-unite-cache tower-unite-cache-thumbnailer;
 
     ueviewer = callPackage ./packages/ueviewer { };

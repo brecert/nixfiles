@@ -55,7 +55,6 @@
     ])
     ++ (with packages; [
       # Applications
-      slippi.slippi-online
       # rpcs3
 
       # Utils / Tools

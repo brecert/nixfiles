@@ -42,15 +42,12 @@
       url = "github:AtaraxiaSjel/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    slippi.url = "path:flakes/slippi";
   };
 
-  outputs = { self, nixpkgs, fenix, home-manager, tower-unite-cache, slippi, ataraxiadev-nur, ... }@inputs:
+  outputs = { self, nixpkgs, fenix, home-manager, tower-unite-cache, ataraxiadev-nur, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      slippi-pkgs = slippi.packages.${system};
       tower-unite-cache-pkgs = tower-unite-cache.packages.${system};
       ataraxiadev-nur-pkgs = ataraxiadev-nur.packages.${system};
     in
@@ -77,7 +74,6 @@
 
       packages.${system} = pkgs.callPackages ./packages.nix {
         inherit system;
-        slippi = slippi-pkgs;
         tower-unite-cache = tower-unite-cache-pkgs;
         ataraxiadev-nur = ataraxiadev-nur-pkgs;
       };
