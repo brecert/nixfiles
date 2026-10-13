@@ -50,8 +50,8 @@
       gnomeExtensions.blur-my-shell
       gnomeExtensions.ddterm
       gnomeExtensions.desktop-cube
-      gnomeExtensions.pano
-      gnomeExtensions.vitals      
+      # gnomeExtensions.pano
+      gnomeExtensions.vitals
     ])
     ++ (with packages; [
       # Applications

@@ -22,6 +22,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/release-26.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     fenix = {
       url = "github:nix-community/fenix";
@@ -44,7 +45,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, fenix, home-manager, tower-unite-cache, ataraxiadev-nur, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, fenix, home-manager, tower-unite-cache, ataraxiadev-nur, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -58,6 +59,7 @@
         specialArgs = {
           inherit (self) outputs;
           inherit inputs;
+          inherit nixpkgs-unstable;
           # todo: impure derivation or some automatic alternative to this
           # used for vscode module
           flakePath = "/home/bree/Documents/nixfiles";

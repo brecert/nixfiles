@@ -1,5 +1,4 @@
 {
-  "window.menuBarVisibility": "toggle",
   "ols.server.path": "/nix/store/vy4ggs1lic116h8x10y5mw2f1ivcgbp7-ols-dev-2026-05/bin/ols",
   "window.autoDetectColorScheme": true,
   "workbench.preferredDarkColorTheme": "Solarized Light",
@@ -33,5 +32,8 @@
   "roc-lang.language-server.exe": "/nix/store/c4j2pakqya4n99p84kdzmzk9qfyaja35-roc_lang_srv-0.0.1/bin/roc_ls",
   "python.analysis.autoImportCompletions": true,
   "Lua.codeLens.enable": true,
-  "workbench.colorTheme": "GitHub Dark"
+  "workbench.colorTheme": "GitHub Dark",
+  "workbench.openInAgents.enabled": false,
+  "workbench.browser.showInTitleBar": false,
+  "window.menuBarVisibility": "compact"
 }

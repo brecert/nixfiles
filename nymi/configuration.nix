@@ -1,5 +1,8 @@
-{ config, pkgs, specialArgs, ... }:
+{ config, pkgs, nixpkgs-unstable, specialArgs, ... }:
 
+let 
+  pkgs-unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
+in
 {
   imports =
     [
@@ -54,7 +57,7 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  # services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
   hardware.nvidia = {
     open = true;
@@ -79,9 +82,9 @@
   # xdg.portal.config.common.default = "*";
   
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  services.gnome.gnome-remote-desktop.enable = false;
+  # services.displayManager.gdm.enable = true;
+  # services.desktopManager.gnome.enable = true;
+  # services.gnome.gnome-remote-desktop.enable = false;
 
   # services.xserver.displayManager.sddm.enable = true;
   # services.desktopManager.lomiri.enable = true;
@@ -91,6 +94,10 @@
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
   
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.lxqt.enable = true;
+
   # enable for appindicator support
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
@@ -137,6 +144,7 @@
   ];
 
   services.flatpak.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   fonts = {
     enableDefaultPackages = true;
@@ -199,7 +207,27 @@
   };
 
   programs.steam.enable = true;
+  services.monado = {
+    enable = true;
+    highPriority = true;
+    defaultRuntime = true;
+    package = pkgs-unstable.monado;
+  };
+  services.wivrn = {
+    enable = true;
+    openFirewall = true;
+    package = pkgs-unstable.wivrn;
+    
+    steam.enable = true;
+    steam.importOXRRuntimes = true;
+    steam.package = pkgs.steam;
 
+    config.enable = true;
+    config.json = {
+      application = [ pkgs-unstable.wayvr ];
+    };
+  };
+  
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
