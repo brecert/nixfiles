@@ -35,9 +35,14 @@ lib.mkMerge [
 
   # GTK
   {
-    gtk.enable = true;
-    gtk.theme.package = pkgs.gnome-themes-extra;
-    gtk.theme.name = "Adwaita";
-    gtk.gtk4.theme = null;
+    # gtk.enable = true;
+    # gtk.theme.package = pkgs.gnome-themes-extra;
+    # gtk.theme.name = "Adwaita";
+    # gtk.gtk4.theme = null;
+  }
+
+  {
+    # services.pipewire.enable = true;
+    # services.pipewire.wireplumber.enable = true;
   }
 ]

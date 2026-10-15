@@ -67,7 +67,6 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
-
   services.libinput.mouse.accelProfile = "flat";
 
   # Enable the Pantheon Desktop Enviroment.
@@ -106,22 +105,24 @@ in
   qt.platformTheme = "lxqt";
  
   # enable for appindicator support
-  services.udev.packages = with pkgs; [ gnome-settings-daemon ];
+  # services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
   # Enable sound.
   security.rtkit.enable = true;
 
-  services.pulseaudio.enable = true;
+  # services.pulseaudio.enable = true;
   services.pipewire = {
-    enable = false;
-    audio.enable = false;
+    enable = true;
+    # audio.enable = true;
     pulse.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     wireplumber.enable = true;
-    package = pkgs.pulseaudioFull;
-    systemWide = true;
-  };
+    # jack.enable = true;
+    # package = pkgs.pulseaudioFull;
+    # systemWide = true;
+  }; 
+  hardware.alsa.enablePersistence = true;
 
   services.earlyoom = {
       enable = true;
@@ -136,7 +137,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.bree = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "audio" ];
     shell = pkgs.fish;
   };
 
