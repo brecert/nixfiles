@@ -1,4 +1,4 @@
-{ config, pkgs, nixpkgs-unstable, specialArgs, ... }:
+{ config, pkgs, lib, nixpkgs-unstable, specialArgs, ... }:
 
 let 
   pkgs-unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
@@ -95,15 +95,13 @@ in
   # services.desktopManager.plasma6.enable = true;
   
   services.xserver.enable = true;
+  services.xserver.xkb.options = "ctrl:swapcaps";
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
   services.displayManager.sddm.wayland.enable = false; 
   services.xserver.displayManager.defaultSession = "lxqt";
-  services.xserver.displayManager.setupCommands = ''
-    setxkbmap -option ctrl:swapcaps
-  '';
   qt.platformTheme = "lxqt";
- 
+
   # enable for appindicator support
   # services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
