@@ -40,21 +40,6 @@ lib.mkMerge [
       configPath = ".mozilla/firefox";
       profiles.primary = {
         isDefault = true;
-
-        settings = {
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          "svg.context-properties.content.enabled" = true;
-          "gnomeTheme.hideSingleTab" = true;
-          "gnomeTheme.normalWidthTabs" = false;
-        };
-
-        userChrome = ''
-          @import "${pkgs.firefox-gnome-theme}/userChrome.css"
-        '';
-
-        userContent = ''
-          @import "${pkgs.firefox-gnome-theme}/userContent.css";
-        '';
       };
     };
   }

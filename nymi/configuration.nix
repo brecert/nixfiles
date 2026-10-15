@@ -1,8 +1,5 @@
 { config, pkgs, lib, nixpkgs-unstable, specialArgs, ... }:
 
-let 
-  pkgs-unstable = nixpkgs-unstable.legacyPackages.${pkgs.system};
-in
 {
   imports =
     [
@@ -68,25 +65,12 @@ in
   };
 
   services.libinput.mouse.accelProfile = "flat";
-
-  # Enable the Pantheon Desktop Enviroment.
-  # services.xserver.displayManager.lightdm.enable = true;  
-  # services.xserver.displayManager.lightdm.greeters.pantheon.enable = true;
-  
-  # services.pantheon.apps.enable = true;
-  # services.pantheon.contractor.enable = true;
-
-  # xdg.portal.enable = true;
-  # xdg.portal.extraPortals = [ pkgs.pantheon.xdg-desktop-portal-pantheon ];
-  # xdg.portal.config.common.default = "*";
   
   # Enable the GNOME Desktop Environment.
   # services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
   # services.gnome.gnome-remote-desktop.enable = false;
 
-  # services.xserver.displayManager.sddm.enable = true;
-  # services.desktopManager.lomiri.enable = true;
   xdg.portal.enable = true;
   xdg.portal.lxqt.enable = true;
 
@@ -96,10 +80,10 @@ in
   
   services.xserver.enable = true;
   services.xserver.xkb.options = "ctrl:swapcaps";
-  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
+  services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = false; 
-  services.xserver.displayManager.defaultSession = "lxqt";
+  services.displayManager.defaultSession = "lxqt";
   qt.platformTheme = "lxqt";
 
   # enable for appindicator support
@@ -217,12 +201,10 @@ in
     enable = true;
     highPriority = true;
     defaultRuntime = true;
-    package = pkgs-unstable.monado;
   };
   services.wivrn = {
     enable = true;
     openFirewall = true;
-    package = pkgs-unstable.wivrn;
     
     steam.enable = true;
     steam.importOXRRuntimes = true;
@@ -230,7 +212,7 @@ in
 
     config.enable = true;
     config.json = {
-      application = [ pkgs-unstable.wayvr ];
+      application = [ pkgs.wayvr ];
     };
   };
   
