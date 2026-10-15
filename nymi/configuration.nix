@@ -89,15 +89,22 @@ in
   # services.xserver.displayManager.sddm.enable = true;
   # services.desktopManager.lomiri.enable = true;
   xdg.portal.enable = true;
+  xdg.portal.lxqt.enable = true;
 
   # Enable the KDE Desktop Enviroment.
   # services.displayManager.sddm.enable = true;
   # services.desktopManager.plasma6.enable = true;
   
   services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.lxqt.enable = true;
-
+  services.displayManager.sddm.wayland.enable = false; 
+  services.xserver.displayManager.defaultSession = "lxqt";
+  services.xserver.displayManager.setupCommands = ''
+    setxkbmap -option ctrl:swapcaps
+  '';
+  qt.platformTheme = "lxqt";
+ 
   # enable for appindicator support
   services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
@@ -120,10 +127,10 @@ in
       enable = true;
       freeSwapThreshold = 3;
       freeMemThreshold = 3;
-      extraArgs = [
-          "-g" "--avoid '^(X|plasma\.*|\.gnome*)$'"
-          "--prefer '^(Tower\.exe|Resonite\.exe)$'"
-      ];
+      # extraArgs = [
+      #     "-g" "--avoid '^(X|plasma\.*|\.gnome*)$'"
+      #     "--prefer '^(Tower\.exe|Resonite\.exe)$'"
+      # ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
