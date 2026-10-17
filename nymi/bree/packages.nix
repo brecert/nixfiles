@@ -1,4 +1,4 @@
-{ config, lib, pkgs, packages, ... }:
+{ pkgs, packages, ... }:
 
 {
   home.packages =
@@ -11,18 +11,19 @@
       livecaptions
       kooha
       eyedropper
+      rpcs3
 
-      # bnnuychat development (temporary)
+      # Development
+      dotnet-sdk_11
       clang
       rustup
-      # nodejs-18_x
+      nodejs
       pnpm
       deno
 
       ols
       odin
 
-      # aoc (temporary)
       ruby
       
       (python3.withPackages(ps: [
@@ -44,19 +45,8 @@
       
       # Gnome
       gnome-boxes
-      # gnome-tweaks
-
-      # gnomeExtensions.appindicator
-      # gnomeExtensions.blur-my-shell
-      # gnomeExtensions.ddterm
-      # gnomeExtensions.desktop-cube
-      # gnomeExtensions.pano
-      # gnomeExtensions.vitals
     ])
     ++ (with packages; [
-      # Applications
-      # rpcs3
-
       # Utils / Tools
       hexpat-lsp
       # tower-unite-cache-thumbnailer

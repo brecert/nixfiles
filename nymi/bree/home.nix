@@ -5,19 +5,12 @@
     ./packages.nix
     ./programs.nix
     ../../modules/home/vscode.nix
+    ../../modules/home/fuchsa-cursor.nix
   ];
 
   home = {
     username = "bree";
     homeDirectory = "/home/bree";
-
-    # pointerCursor = {
-    #   package = packages.fuchsia-cursor;
-    #   name = "Fuchsia";
-    #   size = 32;
-    #   gtk.enable = true;
-    #   x11.enable = true;
-    # };
   };
 
   home.stateVersion = "21.11";

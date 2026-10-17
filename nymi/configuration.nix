@@ -3,10 +3,12 @@
 {
   imports =
     [
-      # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # Include the nix configuration
       ./nix-configuration.nix
+      ./fonts.nix
+      ../modules/nixos/vr.nix
+      ../modules/nixos/ime.nix
+      ../modules/nixos/lxqt.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -27,14 +29,10 @@
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.powersave = false;
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  # networking.useDHCP = false;
   networking.interfaces.enp42s0.useDHCP = true;
   networking.interfaces.wlp5s0.useDHCP = true;
 
-  networking.nameservers = ["1.1.1.1" "8.8.8.8"];
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 
   # networking.wireless.extraConfig = "
   #   freq_list=2412 2417 2422 2427 2432 2437 2442 2447 2452 2457 2462 2467 2472 2484
@@ -47,15 +45,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  i18n.inputMethod.enable = true;
-  i18n.inputMethod.type = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
-
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     open = true;
     powerManagement.enable = true;
@@ -63,70 +54,24 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
+  
   services.libinput.mouse.accelProfile = "flat";
-  
-  # Enable the GNOME Desktop Environment.
-  # services.displayManager.gdm.enable = true;
-  # services.desktopManager.gnome.enable = true;
-  # services.gnome.gnome-remote-desktop.enable = false;
-
-  xdg.portal.enable = true;
-  xdg.portal.lxqt.enable = true;
-
-  # Enable the KDE Desktop Enviroment.
-  # services.displayManager.sddm.enable = true;
-  # services.desktopManager.plasma6.enable = true;
-  
-  services.xserver.enable = true;
   services.xserver.xkb.options = "ctrl:swapcaps";
-  services.xserver.desktopManager.lxqt.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = false; 
-  services.displayManager.defaultSession = "lxqt";
-  qt.platformTheme = "lxqt";
-
-  # lxqt xscreensaver fix
-  services.xscreensaver.enable = true;
-  security.pam.services.xscreensaver.enable = true;
   
-  # enable for appindicator support
-  # services.udev.packages = with pkgs; [ gnome-settings-daemon ];
-
-  # Enable sound.
-  security.rtkit.enable = true;
-
-  # services.pulseaudio.enable = true;
-  services.pipewire = {
-    enable = true;
-    # audio.enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    wireplumber.enable = true;
-    # jack.enable = true;
-    # package = pkgs.pulseaudioFull;
-    # systemWide = true;
-  }; 
-  hardware.alsa.enablePersistence = true;
-
   services.earlyoom = {
-      enable = true;
-      freeSwapThreshold = 3;
-      freeMemThreshold = 3;
-      # extraArgs = [
-      #     "-g" "--avoid '^(X|plasma\.*|\.gnome*)$'"
-      #     "--prefer '^(Tower\.exe|Resonite\.exe)$'"
-      # ];
+    enable = true;
+    freeSwapThreshold = 3;
+    freeMemThreshold = 3;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # needed to be enabled for default shell
+  programs.fish.enable = true;
   users.users.bree = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.fish;
   };
-
+  
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.bree = import ./bree/home.nix;
@@ -135,66 +80,11 @@
 
   environment.systemPackages = with pkgs; [
     micro
-    packages.nm-tray
   ];
 
   services.flatpak.enable = true;
+
   services.gnome.gnome-keyring.enable = true;
-
-  fonts = {
-    enableDefaultPackages = true;
-
-    packages = with pkgs; [
-      inter
-      # fira-code
-      # fira-code-symbols
-      noto-fonts
-      noto-fonts-color-emoji
-      noto-fonts-cjk-sans
-    ];
-
-    fontconfig = {
-      antialias = true;
-      useEmbeddedBitmaps = false;
-      hinting.enable = true;
-      subpixel = {
-        rgba = "rgb";
-        lcdfilter = "default";
-      };
-    };
-
-    fontconfig.defaultFonts = {
-      emoji = [ "Noto Color Emoji" ];
-      monospace = [
-        "Noto Sans Mono"
-        "Noto Sans Mono CJK JP"
-        "Noto Sans Mono CJK KR"
-        "Noto Sans Mono CJK HK"
-        "Noto Sans Mono CJK SC"
-        "Noto Sans Mono CJK TC"
-      ];
-      sansSerif = [
-        # "Inter"
-        "Noto Sans"
-        "Noto Sans CJK JP"
-        "Noto Sans CJK KR"
-        "Noto Sans CJK HK"
-        "Noto Sans CJK SC"
-        "Noto Sans CJK TC"
-      ];
-      serif = [
-        "Noto Serif"
-        "Noto Sans CJK JP"
-        "Noto Sans CJK KR"
-        "Noto Sans CJK HK"
-        "Noto Sans CJK SC"
-        "Noto Sans CJK TC"
-      ];
-    };
-  };
-  
-  # needed to be enabled for default shell
-  programs.fish.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -202,25 +92,11 @@
   };
 
   programs.steam.enable = true;
-  services.monado = {
-    enable = true;
-    highPriority = true;
-    defaultRuntime = true;
-  };
-  services.wivrn = {
-    enable = true;
-    openFirewall = true;
-    
-    steam.enable = true;
-    steam.importOXRRuntimes = true;
-    steam.package = pkgs.steam;
 
-    config.enable = true;
-    config.json = {
-      application = [ pkgs.wayvr ];
-    };
-  };
-  
+  modules.lxqt.enable = true;
+  modules.ime.enable = true;
+  modules.vr.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
