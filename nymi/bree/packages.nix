@@ -44,14 +44,14 @@
       
       # Gnome
       gnome-boxes
-      gnome-tweaks
+      # gnome-tweaks
 
-      gnomeExtensions.appindicator
-      gnomeExtensions.blur-my-shell
-      gnomeExtensions.ddterm
-      gnomeExtensions.desktop-cube
+      # gnomeExtensions.appindicator
+      # gnomeExtensions.blur-my-shell
+      # gnomeExtensions.ddterm
+      # gnomeExtensions.desktop-cube
       # gnomeExtensions.pano
-      gnomeExtensions.vitals
+      # gnomeExtensions.vitals
     ])
     ++ (with packages; [
       # Applications

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, nixpkgs-unstable, specialArgs, ... }:
+{ config, pkgs, lib, nixpkgs-unstable, packages, specialArgs, ... }:
 
 {
   imports =
@@ -86,6 +86,10 @@
   services.displayManager.defaultSession = "lxqt";
   qt.platformTheme = "lxqt";
 
+  # lxqt xscreensaver fix
+  services.xscreensaver.enable = true;
+  security.pam.services.xscreensaver.enable = true;
+  
   # enable for appindicator support
   # services.udev.packages = with pkgs; [ gnome-settings-daemon ];
 
@@ -131,6 +135,7 @@
 
   environment.systemPackages = with pkgs; [
     micro
+    packages.nm-tray
   ];
 
   services.flatpak.enable = true;

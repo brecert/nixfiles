@@ -5,7 +5,6 @@
 , makeWrapper
 , makeDesktopItem
 , copyDesktopItems
-, pkg-config
 , fontconfig
 , glib
 , gtk3

@@ -11,6 +11,8 @@ let
   self = {
     inherit (tower-unite-cache) tower-unite-cache tower-unite-cache-thumbnailer;
 
+    nm-tray = callPackage ./packages/nm-tray { };
+
     ueviewer = callPackage ./packages/ueviewer { };
     hexpat-lsp = callPackage ./packages/hexpat-lsp { };
     fuchsia-cursor = callPackage ./packages/fuchsia-cursor { };
