@@ -12,6 +12,7 @@
       kooha
       eyedropper
       rpcs3
+      material-maker
 
       # Development
       dotnet-sdk_11
