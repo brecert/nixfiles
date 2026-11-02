@@ -11,6 +11,9 @@ let
   self = {
     inherit (tower-unite-cache) tower-unite-cache tower-unite-cache-thumbnailer;
 
+    clade = callPackage ./packages/clade { tibleiz.copper = self.copper; };
+    copper = callPackage ./packages/copper { };
+
     nm-tray = callPackage ./packages/nm-tray { };
 
     ueviewer = callPackage ./packages/ueviewer { };
