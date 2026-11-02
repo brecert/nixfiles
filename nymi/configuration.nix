@@ -91,7 +91,19 @@
     enableSSHSupport = true;
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    icu
+    libx11
+    libice
+    libsm
+    fontconfig.lib
+  ];
+  
   programs.steam.enable = true;
+  programs.steam.extraCompatPackages = [
+    pkgs.proton-ge-bin
+  ];
 
   modules.lxqt.enable = true;
   modules.ime.enable = true;

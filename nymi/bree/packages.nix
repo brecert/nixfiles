@@ -3,6 +3,10 @@
 {
   home.packages =
     (with pkgs; [
+      # Support
+      wineWow64Packages.stable
+      winetricks
+
       # Applications
       telegram-desktop
       prismlauncher
@@ -13,6 +17,7 @@
       eyedropper
       rpcs3
       material-maker
+      renderdoc
 
       # Development
       dotnet-sdk_11

@@ -29,6 +29,8 @@ in
     environment.systemPackages = [
       pkgs.lxqt.qlipper
       packages.nm-tray
+      pkgs.unzip # for archiver, maybe should be placed somewhere else?
+      pkgs.p7zip
     ];
   };
 }
