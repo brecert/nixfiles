@@ -1,4 +1,4 @@
-{ config, lib, pkgs, packages, flakePath, ... }:
+{ config, lib, pkgs, packages, flakePath, nix-vscode-extensions, ... }:
 
 lib.mkMerge [
   # GNOME Keyring
@@ -100,7 +100,7 @@ lib.mkMerge [
       enable = true;
 
       mutableExtensionsDir = false;
-      profiles.default.extensions = with pkgs.vscode-extensions; [
+      profiles.default.extensions = with pkgs.vscode-marketplace; [
         # rust-lang.rust-analyzer-nightly
         denoland.vscode-deno
         editorconfig.editorconfig
@@ -112,6 +112,7 @@ lib.mkMerge [
         sumneko.lua
         ms-python.python
         ms-pyright.pyright
+        papaltine.protograph
       ];
     };
 

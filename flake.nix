@@ -43,9 +43,14 @@
       url = "github:AtaraxiaSjel/nur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, fenix, home-manager, tower-unite-cache, ataraxiadev-nur, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-unstable, fenix, home-manager, tower-unite-cache, ataraxiadev-nur, nix-vscode-extensions, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -68,7 +73,7 @@
         };
 
         modules = [
-          { nixpkgs.overlays = [ fenix.overlays.default ]; }
+          { nixpkgs.overlays = [ fenix.overlays.default nix-vscode-extensions.overlays.default ]; }
           home-manager.nixosModules.home-manager
           ./nymi/configuration.nix
         ];

@@ -20,7 +20,7 @@
       renderdoc
 
       # Development
-      dotnet-sdk_11
+      dotnet-sdk_10
       clang
       rustup
       nodejs
@@ -55,6 +55,9 @@
     ++ (with packages; [
       # Utils / Tools
       hexpat-lsp
+      clade
+      copper
+      flux-sdk
       # tower-unite-cache-thumbnailer
     ]);
 }
