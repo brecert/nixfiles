@@ -13,6 +13,10 @@ let
 
     clade = callPackage ./packages/clade { tibleiz.copper = self.copper; };
     copper = callPackage ./packages/copper { };
+    
+    toit = callPackage ./packages/toit { };
+    
+    flux-sdk = callPackage ./packages/flux-sdk { };
 
     nm-tray = callPackage ./packages/nm-tray { };
 
